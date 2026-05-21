@@ -212,7 +212,7 @@ Page({
   getAiDiagnosis() {
     wx.showLoading({ title: 'AI 诊断计算中...' });
 
-    const { mode, breakEvenRoi, actualRoi, netProfit, profitMargin, refundRate, logistics, cost, price, adSpend, orders, commRate, kolOrders, kolAdSpend, withdrawRate, quickRefundRate } = this.data;
+    const { mode, breakEvenRoi, actualRoi, netProfit, profitMargin, refundRate, logistics, cost, price, adSpend, orders, commRate, kolOrders, kolAdSpend, withdrawRate, quickRefundRate, platformRate } = this.data;
     const USE_CLOUD = true; 
 
     // 构建适配不同模式的 Prompt
@@ -248,27 +248,34 @@ Page({
     }
 
     if (wx.cloud && USE_CLOUD) {
-      wx.cloud.callFunction({
+      const cloudCall = wx.cloud.callFunction({
         name: 'aiDiagnostic',
         data: {
           inputData: mode === 'kol' ? { price, commRate, kolOrders, kolAdSpend } : { price, cost, logistics, platformRate, refundRate, adSpend, orders },
           calcResults: { breakEvenRoi, actualRoi, netProfit, profitMargin }
         }
-      }).then(res => {
-        wx.hideLoading();
-        if (res.result && res.result.success && !res.result.error) {
-          const diag = res.result.diagnosis;
-          this.setData({ aiDiagnosis: diag });
-          this.saveToHistory(diag);
-        } else {
-          console.warn("云开发 AI 返回异常，已切换为本地高仿真诊断算法:", res.result);
-          this.runOfflineDiagnosis();
-        }
-      }).catch(err => {
-        wx.hideLoading();
-        console.log("未检测到云开发部署环境，已激活本地高仿真诊断算法:", err);
-        this.runOfflineDiagnosis();
       });
+
+      const timeout = new Promise((_, reject) => {
+        setTimeout(() => reject(new Error('云开发调用超时')), 6000);
+      });
+
+      Promise.race([cloudCall, timeout])
+        .then(res => {
+          wx.hideLoading();
+          if (res.result && res.result.success && !res.result.error) {
+            const diag = res.result.diagnosis;
+            this.setData({ aiDiagnosis: diag });
+            this.saveToHistory(diag);
+          } else {
+            console.warn("云开发 AI 返回异常，已切换为本地高仿真诊断算法:", res ? res.result : '无返回');
+            this.runOfflineDiagnosis();
+          }
+        }).catch(err => {
+          wx.hideLoading();
+          console.log("云函数调用失败或超时，已激活本地高仿真诊断算法:", err);
+          this.runOfflineDiagnosis();
+        });
     } else {
       wx.hideLoading();
       this.runOfflineDiagnosis();
