@@ -1,0 +1,63 @@
+<view class="container">
+  <!-- 顶部操作栏（如果有记录） -->
+  <view class="action-bar" wx:if="{{historyList.length > 0}}">
+    <text class="count-text">共 {{historyList.length}} 条记录</text>
+    <view class="clear-btn" bindtap="clearHistory">清空历史</view>
+  </view>
+
+  <!-- 历史记录列表 -->
+  <scroll-view scroll-y class="history-list" wx:if="{{historyList.length > 0}}">
+    <view class="card" wx:for="{{historyList}}" wx:key="id">
+      <view class="card-header">
+        <text class="badge {{item.type === '达人版' ? 'badge-kol' : 'badge-shop'}}">{{item.type}}</text>
+        <text class="time">{{item.timeStr}}</text>
+        <text class="delete-icon" bindtap="deleteItem" data-id="{{item.id}}">×</text>
+      </view>
+      
+      <view class="card-body">
+        <view class="grid">
+          <view class="grid-item">
+            <text class="label">售价</text>
+            <text class="value">¥{{item.inputData.price}}</text>
+          </view>
+          <view class="grid-item">
+            <text class="label">{{item.type === '达人版' ? '佣金率' : '进货价'}}</text>
+            <text class="value">{{item.type === '达人版' ? item.inputData.commRate + '%' : '¥' + item.inputData.cost}}</text>
+          </view>
+          <view class="grid-item">
+            <text class="label">实际 ROI</text>
+            <text class="value highlight-roi">{{item.calcResults.actualRoi}}</text>
+          </view>
+          <view class="grid-item">
+            <text class="label">利润</text>
+            <text class="value highlight-profit {{item.calcResults.netProfit >= 0 ? 'pos' : 'neg'}}">¥{{item.calcResults.netProfit}}</text>
+          </view>
+        </view>
+      </view>
+      
+      <!-- 诊断缩略信息 -->
+      <view class="card-footer" wx:if="{{item.aiDiagnosis}}">
+        <text class="diag-title">💡 AI 诊断建议：</text>
+        <text class="diag-content">{{item.aiDiagnosis}}</text>
+      </view>
+    </view>
+
+    <!-- 微信官方广告位（默认隐藏，开通后在 JS 中将 showAd 改为 true 即可一键开启） -->
+    <view class="ad-container" wx:if="{{showAd}}" style="margin-top: 30rpx;">
+      <ad unit-id="您的广告位ID" type="banner"></ad>
+    </view>
+  </scroll-view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:else>
+    <!-- 邮箱插画 -->
+    <image class="empty-icon" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' width='100' height='100'><rect x='47' y='65' width='6' height='25' fill='%23cfd8dc' rx='2' /><rect x='30' y='35' width='40' height='30' fill='%2390caf9' rx='5' /><path d='M 30 35 L 70 35 C 70 23, 30 23, 30 35 Z' fill='%2342a5f5' /><rect x='68' y='28' width='4' height='20' fill='%23ff7043' rx='1' /><rect x='68' y='24' width='10' height='6' fill='%23f4511e' rx='1' /></svg>"></image>
+    <text class="empty-title">暂无历史记录</text>
+    <text class="empty-subtitle">完成一次计算后，记录会显示在这里</text>
+    
+    <!-- 微信官方广告位（默认隐藏） -->
+    <view class="ad-container" wx:if="{{showAd}}" style="margin-top: 60rpx; width: 100%;">
+      <ad unit-id="您的广告位ID" type="banner"></ad>
+    </view>
+  </view>
+</view>

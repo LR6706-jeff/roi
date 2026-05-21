@@ -1,0 +1,81 @@
+<view class="container">
+  <!-- 个人中心顶部头部 -->
+  <view class="header-card">
+    <image class="avatar" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' width='100' height='100'><circle cx='50' cy='50' r='50' fill='%23eef1f6'/><circle cx='50' cy='38' r='18' fill='%23a0aec0'/><path d='M 18 80 C 18 60, 82 60, 82 80 Z' fill='%23a0aec0'/></svg>"></image>
+    <text class="username">ROI用户</text>
+    <view class="calc-badge">
+      <text class="badge-icon">📊</text>
+      <text class="badge-text">累计计算 {{totalCount}} 次</text>
+    </view>
+  </view>
+
+  <!-- 统计核心指标 -->
+  <view class="section-title">使用统计 <text class="sub-title">基于最近 200 条记录</text></view>
+  
+  <view class="stats-row">
+    <!-- 总计算次数卡片 -->
+    <view class="stats-card stats-card-blue">
+      <view class="card-title">
+        <text class="card-icon">📊</text>
+        <text class="card-label">总计算次数</text>
+      </view>
+      <text class="card-value">{{totalCount}}</text>
+      <text class="card-subtext">近7天 {{recentCount}} 次</text>
+    </view>
+    
+    <!-- 达人占比卡片 -->
+    <view class="stats-card stats-card-orange">
+      <view class="card-title">
+        <text class="card-icon">🎯</text>
+        <text class="card-label">达人占比</text>
+      </view>
+      <text class="card-value">{{kolPercentage}}%</text>
+      <text class="card-subtext">达人 {{kolCount}} / 商家 {{shopCount}}</text>
+    </view>
+  </view>
+
+  <!-- 类型分布 -->
+  <view class="section-title">类型分布 <text class="sub-title">达人 vs 商家</text></view>
+  <view class="dist-box">
+    <view class="dist-item">
+      <view class="dist-left">
+        <text class="dist-icon">🎯</text>
+        <text class="dist-label">达人版</text>
+      </view>
+      <view class="dist-bar-bg">
+        <view class="dist-bar dist-bar-kol" style="width: {{kolPercentage}}%;"></view>
+      </view>
+      <text class="dist-value">{{kolPercentage}}%</text>
+    </view>
+    
+    <view class="dist-item">
+      <view class="dist-left">
+        <text class="dist-icon">🏪</text>
+        <text class="dist-label">商家版</text>
+      </view>
+      <view class="dist-bar-bg">
+        <view class="dist-bar dist-bar-shop" style="width: {{shopPercentage}}%;"></view>
+      </view>
+      <text class="dist-value">{{shopPercentage}}%</text>
+    </view>
+  </view>
+
+  <!-- 平均保本 ROI -->
+  <view class="section-title">平均保本 ROI <text class="sub-title">按记录统计</text></view>
+  <view class="roi-box">
+    <view class="roi-item">
+      <view class="roi-left">
+        <view class="dot dot-kol"></view>
+        <text class="roi-label">达人版</text>
+      </view>
+      <text class="roi-value">{{avgKolBreakEven}}</text>
+    </view>
+    <view class="roi-item">
+      <view class="roi-left">
+        <view class="dot dot-shop"></view>
+        <text class="roi-label">商家版</text>
+      </view>
+      <text class="roi-value">{{avgShopBreakEven}}</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,249 @@
+.container {
+  padding: 30rpx;
+  background-color: #F5F7FA;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* 个人中心顶部头部卡片 */
+.header-card {
+  position: relative;
+  background: linear-gradient(135deg, #0969da 0%, #6f42c1 100%);
+  border-radius: 24rpx;
+  padding: 40rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30rpx;
+  box-shadow: 0 8rpx 24rpx rgba(9, 105, 218, 0.15);
+}
+
+.avatar {
+  width: 130rpx;
+  height: 130rpx;
+  border-radius: 50%;
+  border: 4rpx solid rgba(255, 255, 255, 0.8);
+  background-color: #ffffff;
+  margin-bottom: 16rpx;
+}
+
+.username {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 16rpx;
+}
+
+.calc-badge {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 8rpx 24rpx;
+  border-radius: 100rpx;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.badge-icon {
+  font-size: 24rpx;
+}
+
+.badge-text {
+  font-size: 24rpx;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* 板块标题 */
+.section-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #24292f;
+  margin: 32rpx 0 16rpx 0;
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.sub-title {
+  font-size: 20rpx;
+  font-weight: normal;
+  color: #8b949e;
+}
+
+/* 统计卡片行 */
+.stats-row {
+  display: flex;
+  gap: 24rpx;
+  margin-bottom: 24rpx;
+}
+
+.stats-card {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  margin-bottom: 16rpx;
+}
+
+.card-icon {
+  font-size: 24rpx;
+}
+
+.card-label {
+  font-size: 22rpx;
+  color: #8b949e;
+  font-weight: 500;
+}
+
+.card-value {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #24292f;
+  margin-bottom: 8rpx;
+}
+
+.card-subtext {
+  font-size: 20rpx;
+  color: #8b949e;
+}
+
+.stats-card-blue {
+  border-left: 6rpx solid #0969da;
+}
+
+.stats-card-orange {
+  border-left: 6rpx solid #ff4d6d;
+}
+
+/* 分布图盒子 */
+.dist-box {
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.dist-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dist-left {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  width: 140rpx;
+}
+
+.dist-icon {
+  font-size: 26rpx;
+}
+
+.dist-label {
+  font-size: 24rpx;
+  color: #24292f;
+  font-weight: 500;
+}
+
+.dist-bar-bg {
+  flex: 1;
+  height: 16rpx;
+  background: #f0f1f2;
+  border-radius: 100rpx;
+  margin: 0 20rpx;
+  overflow: hidden;
+}
+
+.dist-bar {
+  height: 100%;
+  border-radius: 100rpx;
+  transition: width 0.3s ease;
+}
+
+.dist-bar-kol {
+  background: #ff4d6d;
+}
+
+.dist-bar-shop {
+  background: #0969da;
+}
+
+.dist-value {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #24292f;
+  width: 70rpx;
+  text-align: right;
+}
+
+/* 平均保本 ROI 模块 */
+.roi-box {
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.roi-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12rpx 0;
+}
+
+.roi-item:not(:last-child) {
+  border-bottom: 1px solid #f0f1f2;
+}
+
+.roi-left {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+}
+
+.dot-kol {
+  background-color: #ff4d6d;
+}
+
+.dot-shop {
+  background-color: #0969da;
+}
+
+.roi-label {
+  font-size: 26rpx;
+  color: #24292f;
+  font-weight: 500;
+}
+
+.roi-value {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #24292f;
+}

@@ -1,0 +1,144 @@
+<view class="container">
+  <!-- 头部 Slogan -->
+  <view class="header">
+    <text class="title">ROI 计算器</text>
+    <text class="subtitle">实时核算 · 智能AI诊断 · 降本增效</text>
+  </view>
+
+  <!-- 达人/商家切换 Tab -->
+  <view class="tab-toggle">
+    <view class="toggle-item {{mode === 'kol' ? 'active' : ''}}" bindtap="switchMode" data-mode="kol">达人版</view>
+    <view class="toggle-item {{mode === 'shop' ? 'active' : ''}}" bindtap="switchMode" data-mode="shop">商家版</view>
+  </view>
+
+  <!-- 实时计算看板 -->
+  <view class="dashboard-card">
+    <view class="indicator-grid">
+      <view class="indicator-item">
+        <text class="label">实际综合 ROI</text>
+        <text class="value {{actualRoi >= breakEvenRoi ? 'text-green' : 'text-red'}}">{{actualRoi || '0.00'}}</text>
+      </view>
+      <view class="indicator-item">
+        <text class="label">保本底线 ROI</text>
+        <text class="value text-blue">{{breakEvenRoi || '0.00'}}</text>
+      </view>
+    </view>
+    
+    <view class="profit-divider"></view>
+    
+    <view class="profit-row">
+      <view class="profit-item">
+        <text class="sub-label">{{mode === 'kol' ? '预估佣金净收益' : '预估净利润'}}</text>
+        <text class="sub-value {{netProfit > 0 ? 'text-green' : 'text-red'}}">¥{{netProfit || '0.00'}}</text>
+      </view>
+      <view class="profit-item">
+        <text class="sub-label">{{mode === 'kol' ? '投流分成利润率' : '综合利润率'}}</text>
+        <text class="sub-value">{{profitMargin || '0'}}%</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- AI 智能诊断区域 -->
+  <view class="ai-box">
+    <view class="ai-header">
+      <text class="ai-title">✨ AI 投流诊断建议</text>
+    </view>
+    <view class="ai-content">
+      <block wx:if="{{aiDiagnosis}}">
+        <text class="ai-text">{{aiDiagnosis}}</text>
+      </block>
+      <block wx:else>
+        <view class="ai-placeholder">
+          <text>输入投流成本数据后，一键生成诊断并保存历史</text>
+          <button class="ai-btn" bindtap="getAiDiagnosis">🚀 一键 AI 诊断</button>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 达人版数据输入卡片 -->
+  <view class="form-card" wx:if="{{mode === 'kol'}}">
+    <view class="form-title">📊 达人带货数据</view>
+    
+    <view class="input-group">
+      <text class="input-label">商品售价 (元)</text>
+      <input type="digit" placeholder="0.00" value="{{price}}" bindinput="onInput" data-field="price" placeholder-class="placeholder-style" />
+    </view>
+
+    <view class="input-group">
+      <text class="input-label">佣金比例 (%)</text>
+      <input type="digit" placeholder="0" value="{{commRate}}" bindinput="onInput" data-field="commRate" placeholder-class="placeholder-style" />
+    </view>
+
+    <view class="input-group">
+      <text class="input-label">预估出单量 (单)</text>
+      <input type="number" placeholder="0" value="{{kolOrders}}" bindinput="onInput" data-field="kolOrders" placeholder-class="placeholder-style" />
+    </view>
+
+    <view class="input-group">
+      <text class="input-label">广告花费 (元)</text>
+      <input type="digit" placeholder="0.00" value="{{kolAdSpend}}" bindinput="onInput" data-field="kolAdSpend" placeholder-class="placeholder-style" />
+    </view>
+
+    <text class="input-label" style="color:#94a3b8;margin-bottom:12rpx;display:block;">高级选项（可选）</text>
+    <view class="input-group-row">
+      <view class="input-group half">
+        <text class="input-label">提现费率 (%)</text>
+        <input type="digit" placeholder="0" value="{{withdrawRate}}" bindinput="onInput" data-field="withdrawRate" placeholder-class="placeholder-style" />
+      </view>
+      <view class="input-group half">
+        <text class="input-label">1h退款率 (%)</text>
+        <input type="digit" placeholder="0" value="{{quickRefundRate}}" bindinput="onInput" data-field="quickRefundRate" placeholder-class="placeholder-style" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 商家版数据输入卡片 -->
+  <view class="form-card" wx:if="{{mode === 'shop'}}">
+    <view class="form-title">📊 基础经营成本</view>
+    
+    <view class="input-group">
+      <text class="input-label">商品售价 (元)</text>
+      <input type="digit" placeholder="0.00" value="{{price}}" bindinput="onInput" data-field="price" placeholder-class="placeholder-style" />
+    </view>
+
+    <view class="input-group">
+      <text class="input-label">进货成本 (元)</text>
+      <input type="digit" placeholder="0.00" value="{{cost}}" bindinput="onInput" data-field="cost" placeholder-class="placeholder-style" />
+    </view>
+
+    <view class="input-group">
+      <text class="input-label">物流包装费 (元)</text>
+      <input type="digit" placeholder="0.00" value="{{logistics}}" bindinput="onInput" data-field="logistics" placeholder-class="placeholder-style" />
+    </view>
+
+    <view class="input-group-row">
+      <view class="input-group half">
+        <text class="input-label">平台扣点 (%)</text>
+        <input type="digit" placeholder="0" value="{{platformRate}}" bindinput="onInput" data-field="platformRate" placeholder-class="placeholder-style" />
+      </view>
+      <view class="input-group half">
+        <text class="input-label">退货率 (%)</text>
+        <input type="digit" placeholder="0" value="{{refundRate}}" bindinput="onInput" data-field="refundRate" placeholder-class="placeholder-style" />
+      </view>
+    </view>
+  </view>
+
+  <view class="form-card" wx:if="{{mode === 'shop'}}">
+    <view class="form-title">📢 投放推广数据</view>
+    
+    <view class="input-group">
+      <text class="input-label">广告花费 (元)</text>
+      <input type="digit" placeholder="0.00" value="{{adSpend}}" bindinput="onInput" data-field="adSpend" placeholder-class="placeholder-style" />
+    </view>
+
+    <view class="input-group">
+      <text class="input-label">实际成交订单数</text>
+      <input type="number" placeholder="0" value="{{orders}}" bindinput="onInput" data-field="orders" placeholder-class="placeholder-style" />
+    </view>
+  </view>
+  
+  <view class="action-bar">
+    <button class="reset-btn" bindtap="resetForm">重置数据</button>
+  </view>
+</view>
