@@ -297,7 +297,12 @@ Page({
       if (actualRoi !== '∞' && actualRoi !== '--' && parseFloat(actualRoi) < parseFloat(breakEvenRoi)) {
         suggestion = `❌ 【当前亏损诊断】您的实际综合 ROI (${actualRoi}) 低于保本底线 (${breakEvenRoi})。主要是因为：当前退货率 (${refundRate}%) 与进货成本占售价比例 (${((parseFloat(cost)/parseFloat(price))*100).toFixed(0)}%) 挤压了利润空间。建议：1. 提升客单价降低单件物流费占比；2. 优化投放素材拉高 ROI。`;
       } else if (parseFloat(netProfit) > 0) {
-        suggestion = `✅ 【健康盈利诊断】非常棒！当前处于盈利状态。保本 ROI 仅为 ${breakEvenRoi}。商品毛利率达 ${(((parseFloat(price)-parseFloat(cost))/parseFloat(price))*100).toFixed(0)}%。优化方向：建议尝试加大广告预算，同时使用聚合物流将单均邮费降至3元以下，利润可再升8%！`;
+        const logisticsVal = parseFloat(logistics) || 0;
+        const logisticsText = logisticsVal > 3 
+          ? `同时使用聚合物流将单均邮费降至3元以下，利润可再升8%！`
+          : `当前单均邮费已控制在健康水平（${logisticsVal}元）。建议继续通过提升详情页转化率或老客户留存来拉高利润！`;
+        
+        suggestion = `✅ 【健康盈利诊断】非常棒！当前处于盈利状态。保本 ROI 仅为 ${breakEvenRoi}。商品毛利率达 ${(((parseFloat(price)-parseFloat(cost))/parseFloat(price))*100).toFixed(0)}%。优化方向：建议尝试加大广告预算，${logisticsText}`;
       } else {
         suggestion = `⚠️ 【数据不足/微利诊断】数据表现较为单薄，利润点偏低。建议优化详情页或主图，降低当前的退货率 (${refundRate}%)；同时通过高转化文案，降低目前的广告获客成本。`;
       }

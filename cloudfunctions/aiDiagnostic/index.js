@@ -37,7 +37,7 @@ exports.main = async (event, context) => {
 
   try {
     // 调用微信云开发内置的免费混元大模型接口
-    const res = await cloud.openapi.hunyuan.chat({
+    const res = await cloud.openapi.hunyuan.chatCompletions({
       model: 'hunyuan-lite', // 使用免费赠送额度的模型
       messages: [{ role: 'user', content: prompt }]
     });
