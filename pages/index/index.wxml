@@ -45,7 +45,7 @@
     </view>
     <view class="ai-content">
       <block wx:if="{{aiDiagnosis}}">
-        <text class="ai-text">{{aiDiagnosis}}</text>
+        <text class="ai-text" user-select>{{aiDiagnosis}}</text>
       </block>
       <block wx:else>
         <view class="ai-placeholder">
