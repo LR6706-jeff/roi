@@ -78,4 +78,17 @@
       <text class="roi-value">{{avgShopBreakEven}}</text>
     </view>
   </view>
+
+  <!-- 问题反馈卡片 -->
+  <view class="section-title">问题反馈 <text class="sub-title">扫码联系作者</text></view>
+  <view class="feedback-card">
+    <image class="feedback-qr" src="/images/wechat-qr.jpg" mode="aspectFit"></image>
+    <view class="feedback-info">
+      <text class="feedback-title">💬 遇到问题？</text>
+      <text class="feedback-desc">扫码添加微信，反馈 bug 或功能建议</text>
+      <view class="feedback-tag">作者：抢滩登陆</view>
+    </view>
+  </view>
+
+  <view class="footer-tip">数据仅存储于本机，不会上传 🔒</view>
 </view>

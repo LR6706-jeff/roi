@@ -247,3 +247,62 @@
   font-weight: bold;
   color: #24292f;
 }
+
+/* 问题反馈卡片 */
+.feedback-card {
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  margin-bottom: 24rpx;
+}
+
+.feedback-qr {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 12rpx;
+  flex-shrink: 0;
+  border: 1px solid #f0f1f2;
+}
+
+.feedback-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+  flex: 1;
+}
+
+.feedback-title {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #24292f;
+}
+
+.feedback-desc {
+  font-size: 22rpx;
+  color: #8b949e;
+  line-height: 1.6;
+}
+
+.feedback-tag {
+  display: inline-block;
+  background: linear-gradient(90deg, rgba(9,105,218,0.08), rgba(111,66,193,0.08));
+  color: #0969da;
+  font-size: 20rpx;
+  font-weight: 600;
+  padding: 6rpx 16rpx;
+  border-radius: 100rpx;
+  border: 1px solid rgba(9,105,218,0.15);
+  width: fit-content;
+}
+
+.footer-tip {
+  text-align: center;
+  font-size: 20rpx;
+  color: #c0c7cf;
+  padding: 20rpx 0 40rpx;
+}
